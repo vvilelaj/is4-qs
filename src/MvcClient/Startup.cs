@@ -42,9 +42,13 @@ namespace MvcClient
                 opts.ClientId = "mvc";
                 opts.ClientSecret = "secret";
                 opts.ResponseType = "code";
-                opts.Scope.Add("email");
 
                 opts.SaveTokens = true;
+
+                opts.Scope.Add("email");
+                opts.Scope.Add("api1");
+                opts.Scope.Add("offline_access");
+
             });
 
 

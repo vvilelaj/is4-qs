@@ -2,7 +2,8 @@
 
 <h2>Claims</h2>
 
-@Html.ActionLink("Logout","Logout","Home")
+@Html.ActionLink("Logout", "Logout", "Home") <br/>
+@Html.ActionLink("Call Api", "CallApi", "Home")
 
 <dl>
     @foreach (var claim in User.Claims)
