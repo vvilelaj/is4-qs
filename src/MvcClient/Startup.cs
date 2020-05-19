@@ -45,6 +45,7 @@ namespace MvcClient
 
                 opts.SaveTokens = true;
 
+                //opts.Scope.Add("profile");
                 opts.Scope.Add("email");
                 opts.Scope.Add("api1");
                 opts.Scope.Add("offline_access");

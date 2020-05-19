@@ -55,5 +55,17 @@ namespace MvcClient.Controllers
             ViewBag.Json = JArray.Parse(content).ToString();
             return View("json");
         }
+
+        public async Task<IActionResult> CallAnotherApi()
+        {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            var content = await client.GetStringAsync("http://localhost:5001/products");
+
+            ViewBag.Json = JArray.Parse(content).ToString();
+            return View("json");
+        }
     }
 }

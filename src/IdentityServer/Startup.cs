@@ -28,34 +28,34 @@ namespace IdentityServer
             // uncomment, if you want to add an MVC-based UI
             services.AddControllersWithViews();
 
-            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
-            const string cnnStr = @"Data Source=localhost;Database=IdentityServer4;User Id=SA;Password=P2ssw0rd";
+            // var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+            // const string cnnStr = @"Data Source=localhost;Database=IdentityServer4;User Id=SA;Password=P2ssw0rd";
             var builder = services.AddIdentityServer()
-                // .AddInMemoryIdentityResources(Config.Ids)
-                // .AddInMemoryApiResources(Config.Apis)
-                // .AddInMemoryClients(Config.Clients)
-                .AddTestUsers(TestUsers.Users)
-                .AddConfigurationStore(opt =>
-                {
-                    opt.ConfigureDbContext = dbContextBuilder =>
-                    {
-                        dbContextBuilder.UseSqlServer(cnnStr,
-                        sqlOpts =>
-                        {
-                            sqlOpts.MigrationsAssembly(migrationsAssembly);
-                        });
-                    };
-                })
-                .AddOperationalStore(opts =>
-                {
-                    opts.ConfigureDbContext = dbContextBuilder =>
-                    {
-                        dbContextBuilder.UseSqlServer(cnnStr, sqlOpts =>
-                        {
-                            sqlOpts.MigrationsAssembly(migrationsAssembly);
-                        });
-                    };
-                });
+                 .AddInMemoryIdentityResources(Config.Ids)
+                 .AddInMemoryApiResources(Config.Apis)
+                 .AddInMemoryClients(Config.Clients)
+                 .AddTestUsers(TestUsers.Users);
+            //.AddConfigurationStore(opt =>
+            //{
+            //    opt.ConfigureDbContext = dbContextBuilder =>
+            //    {
+            //        dbContextBuilder.UseSqlServer(cnnStr,
+            //        sqlOpts =>
+            //        {
+            //            sqlOpts.MigrationsAssembly(migrationsAssembly);
+            //        });
+            //    };
+            //})
+            //.AddOperationalStore(opts =>
+            //{
+            //    opts.ConfigureDbContext = dbContextBuilder =>
+            //    {
+            //        dbContextBuilder.UseSqlServer(cnnStr, sqlOpts =>
+            //        {
+            //            sqlOpts.MigrationsAssembly(migrationsAssembly);
+            //        });
+            //    };
+            //});
 
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
@@ -64,7 +64,7 @@ namespace IdentityServer
         public void Configure(IApplicationBuilder app)
         {
             // this will do the initial DB population
-            InitializeDatabase(app);
+            // InitializeDatabase(app);
 
             if (Environment.IsDevelopment())
             {
@@ -84,7 +84,7 @@ namespace IdentityServer
                 endpoints.MapDefaultControllerRoute();
             });
         }
-        
+
         private void InitializeDatabase(IApplicationBuilder app)
         {
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())

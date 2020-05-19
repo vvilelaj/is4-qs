@@ -55,12 +55,13 @@ namespace IdentityServer
                     AllowedScopes = new List<string>
                         {
                             IdentityServerConstants.StandardScopes.OpenId,
-                            IdentityServerConstants.StandardScopes.Profile,
+                            // IdentityServerConstants.StandardScopes.Profile,
                             IdentityServerConstants.StandardScopes.Email,
                             "api1",
                         },
 
                     AllowOfflineAccess = true,
+                    AlwaysIncludeUserClaimsInIdToken = true,
                 }
             };
 
